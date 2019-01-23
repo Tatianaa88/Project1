@@ -1,0 +1,5 @@
+for number in range(1,11,2):
+    print(number)
+
+for item in ["Carol","Bon"]:
+    print(item)

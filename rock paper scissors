@@ -1,0 +1,15 @@
+#set players
+player1 = input("Please enter your name player1: ").upper()
+player2 = input("Please enter your name player2: ").upper()
+
+#choice
+answer_p1 = str(input("Player1 would you like to select rock, paper or scissors?"))
+answer_p2 = str(input("Player2 would you like to select rock, paper or scissors?"))
+
+#who wins
+if answer_p1 == "rock" and answer_p2 == "scissors" or answer_p1 == "paper" and answer_p2 == "rock" or answer_p1 == "scissors" and answer_p2 == "paper":
+    print(player1, "won")
+elif answer_p1 == "rock" and answer_p2 == "paper" or answer_p1 == "paper" and answer_p2 == "scissors" or answer_p1 == "scissors" and answer_p2 == "rock":
+    print(player2, "won")
+elif answer_p1 == answer_p2:
+    print("Both are even. Nobody won.")

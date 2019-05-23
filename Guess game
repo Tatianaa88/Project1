@@ -1,0 +1,19 @@
+import random
+
+gen_num = random.randint(1,9)
+
+def game():
+    users_num = int(input("Please enter your number from 1 to 9 to start the game: "))
+
+    if users_num > gen_num:
+        print("You guessed too high.")
+    elif users_num < gen_num:
+        print("You guessed too low. Please try again.")
+    elif users_num == gen_num:
+        print("Congrats! You won!")
+
+
+answer = input("Type 'y' to start the game. Type 'exit' to finish the game: ").strip().lower()
+
+while answer == "y":
+    game()

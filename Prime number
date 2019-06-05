@@ -1,0 +1,16 @@
+list = range(1,num+1)
+
+def prime():
+    for i in list:
+        if num % i == 0:
+            return True
+
+        elif num % i != 0:
+            return False
+def result():
+    if True:
+        print("number is prime")
+    elif False
+
+prime()
+result()

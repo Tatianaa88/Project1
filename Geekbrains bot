@@ -1,0 +1,31 @@
+import os
+import sys
+
+print("That's the Python program")
+
+name = input("Please enter your name: ")
+print(name, ",welcome to Python")
+
+while answer != 'q':
+    answer = input("Would you like to work?(y/n/q)")
+
+    if answer == 'y':
+        print('''Please select one of the actions:
+                    [1] display files list
+                    [2] get current working directory
+                    [3] rename directory''')
+        choice = int(input("Please enter action number, i.e. 1 or 2 or 3: "))
+        if choice == 1:
+            print(os.listdir())
+
+        elif choice == 2:
+            print("current working directory:", os.getcwd())
+
+        elif choice == 3:
+            os.rename("Logged in user", os.getlogin())
+
+
+    elif answer == 'n':
+        print('Good bye')
+    else:
+        print("Unknown operation")

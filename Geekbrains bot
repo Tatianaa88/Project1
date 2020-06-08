@@ -1,31 +1,89 @@
 import os
 import sys
+import shutil
 
-print("That's the Python program")
+print("Great Python Programm!")
+print("Hello, Programmer")
+name = input("Your name: ")
 
-name = input("Please enter your name: ")
-print(name, ",welcome to Python")
+print(name, ", welcome to Python world!")
 
-while answer != 'q':
-    answer = input("Would you like to work?(y/n/q)")
+answer = ''
 
-    if answer == 'y':
-        print('''Please select one of the actions:
-                    [1] display files list
-                    [2] get current working directory
-                    [3] rename directory''')
-        choice = int(input("Please enter action number, i.e. 1 or 2 or 3: "))
-        if choice == 1:
+while answer !="N":
+    answer = input("Let's work? (Y/N)").upper()
+    if answer == 'Y':
+        print("""Here are the options: 
+        1. show files in folder
+        2. get actual login name, current directory, file system encoding.
+        3. duplicate all files
+        4. duplicate files you choose
+        5. delete duplicate files in selected folder""")
+        do = int(input("Please select an option: "))
+
+        if do == 1:
             print(os.listdir())
+        elif do ==2:
+            print("Current login name: ", os.getlogin())
+            print("Current work directory: ", os.getcwd())
+            print("File system encoding: ", sys.getfilesystemencoding())
+        elif do == 3:
+            print("Duplicate all files")
+            file_list=os.listdir()
+            i=0
+            while i < len(file_list):
+                if os.path.isfile(file_list[i]):
+                    sep_filename = file_list[i].split('.')
+                    newfile="./"+sep_filename[0]+"_dupl."+sep_filename[1]
+                    file = "./"+file_list[i]
+                    shutil.copy(file,newfile)
+                i=i+1
+            print(os.listdir())
+        elif do == 4:
+            filename_list = os.listdir()
+            c = 1
+            for i in filename_list:
+                print(str(c)+' - '+i)
+                c +=1
+            sel_file = int(input("Please select file number: "))
+            if os.path.isfile(filename_list[sel_file-1]):
+                sep_filename = filename_list[sel_file-1].split('.')
+                newfile = "./" + sep_filename[0] + "_dupl." + sep_filename[1]
+                file = "./" + filename_list[sel_file-1]
+                shutil.copy(file, newfile)
+                print("Here is your duplicate: ", newfile)
+            else:
+                print("It's not a file.")
+        elif do == 5:
+            dir_list = os.listdir()
+            new_list = []
+            d = 1
+            for i in dir_list:
+                if os.path.isdir(i):
+                    new_list.append(i)
+                    print(str(d) + " - " + i)
+                    d += 1
+            sel_folder = int(input("Please select the folder id: "))
+            ftr = os.listdir(new_list[sel_folder - 1])
+            for i in ftr:
+                # print(i)
+                # print(os.path.isfile(i))
+                if os.path.isfile(i):
+                    print(i)
+                    print(i.find("dupl"))
+                    if i.find("dupl") != -1:
+                        print(i)
+                        print(new_list[sel_folder])
+                        f_torem = "./"+ new_list[sel_folder -1]+"/"+i
+                        os.remove(f_torem)
+            # print(os.listdir(new_list[sel_folder-1]))
 
-        elif choice == 2:
-            print("current working directory:", os.getcwd())
+        #return list of directories
+        #https://www.tutorialspoint.com/python/string_find.htm search in string
+        else:
+            pass
 
-        elif choice == 3:
-            os.rename("Logged in user", os.getlogin())
-
-
-    elif answer == 'n':
-        print('Good bye')
+    elif answer == 'N':
+        print("Good bye!")
     else:
-        print("Unknown operation")
+        print("Unknown input")

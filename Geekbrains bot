@@ -73,7 +73,7 @@ while answer !="N":
                     print(i.find("dupl"))
                     if i.find("dupl") != -1:
                         print(i)
-                        print(new_list[sel_folder])
+                        print(new_list[sel_folder-1])
                         f_torem = "./"+ new_list[sel_folder -1]+"/"+i
                         os.remove(f_torem)
             # print(os.listdir(new_list[sel_folder-1]))

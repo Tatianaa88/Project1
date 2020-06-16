@@ -1,89 +1,108 @@
 import os
 import sys
 import shutil
+import random
 
-print("Great Python Programm!")
-print("Hello, Programmer")
-name = input("Your name: ")
+def duple_files():
+    file_list = os.listdir()
+    i = 0
+    while i < len(file_list):
+        if os.path.isfile(file_list[i]):
+            sep_filename = file_list[i].split('.')
+            newfile = "./" + sep_filename[0] + "_dupl." + sep_filename[1]
+            file = "./" + file_list[i]
+            shutil.copy(file, newfile)
+        i = i + 1
+    print(os.listdir())
 
-print(name, ", welcome to Python world!")
 
-answer = ''
+def main():
+    print("Great Python Programm!")
+    print("Hello, Programmer")
+    name = input("Your name: ")
 
-while answer !="N":
-    answer = input("Let's work? (Y/N)").upper()
-    if answer == 'Y':
-        print("""Here are the options: 
-        1. show files in folder
-        2. get actual login name, current directory, file system encoding.
-        3. duplicate all files
-        4. duplicate files you choose
-        5. delete duplicate files in selected folder""")
-        do = int(input("Please select an option: "))
+    print(name, ", welcome to Python world!")
 
-        if do == 1:
-            print(os.listdir())
-        elif do ==2:
-            print("Current login name: ", os.getlogin())
-            print("Current work directory: ", os.getcwd())
-            print("File system encoding: ", sys.getfilesystemencoding())
-        elif do == 3:
-            print("Duplicate all files")
-            file_list=os.listdir()
-            i=0
-            while i < len(file_list):
-                if os.path.isfile(file_list[i]):
-                    sep_filename = file_list[i].split('.')
-                    newfile="./"+sep_filename[0]+"_dupl."+sep_filename[1]
-                    file = "./"+file_list[i]
-                    shutil.copy(file,newfile)
-                i=i+1
-            print(os.listdir())
-        elif do == 4:
-            filename_list = os.listdir()
-            c = 1
-            for i in filename_list:
-                print(str(c)+' - '+i)
-                c +=1
-            sel_file = int(input("Please select file number: "))
-            if os.path.isfile(filename_list[sel_file-1]):
-                sep_filename = filename_list[sel_file-1].split('.')
-                newfile = "./" + sep_filename[0] + "_dupl." + sep_filename[1]
-                file = "./" + filename_list[sel_file-1]
-                shutil.copy(file, newfile)
-                print("Here is your duplicate: ", newfile)
-            else:
-                print("It's not a file.")
-        elif do == 5:
-            dir_list = os.listdir()
-            new_list = []
-            d = 1
-            for i in dir_list:
-                if os.path.isdir(i):
-                    new_list.append(i)
-                    print(str(d) + " - " + i)
-                    d += 1
-            sel_folder = int(input("Please select the folder id: "))
-            ftr = os.listdir(new_list[sel_folder - 1])
-            for i in ftr:
-                # print(i)
-                # print(os.path.isfile(i))
-                if os.path.isfile(i):
-                    print(i)
-                    print(i.find("dupl"))
-                    if i.find("dupl") != -1:
+    answer = ''
+
+    while answer != "N":
+        answer = input("Let's work? (Y/N)").upper()
+        if answer == 'Y':
+            print("""Here are the options: 
+            1. show files in folder
+            2. get actual login name, current directory, file system encoding.
+            3. duplicate all files
+            4. duplicate files you choose
+            5. delete duplicate files in selected folder
+            6. delete random file""")
+            do = int(input("Please select an option: "))
+
+            if do == 1:
+                print(os.listdir())
+            elif do == 2:
+                print("Current login name: ", os.getlogin())
+                print("Current work directory: ", os.getcwd())
+                print("File system encoding: ", sys.getfilesystemencoding())
+            elif do == 3:
+                print("Duplicate all files")
+                duple_files()
+
+            elif do == 4:
+                filename_list = os.listdir()
+                c = 1
+                for i in filename_list:
+                    print(str(c) + ' - ' + i)
+                    c += 1
+                sel_file = int(input("Please select file number: "))
+                if os.path.isfile(filename_list[sel_file - 1]):
+                    sep_filename = filename_list[sel_file - 1].split('.')
+                    newfile = "./" + sep_filename[0] + "_dupl." + sep_filename[1]
+                    file = "./" + filename_list[sel_file - 1]
+                    shutil.copy(file, newfile)
+                    print("Here is your duplicate: ", newfile)
+                else:
+                    print("It's not a file.")
+            elif do == 5:
+                dir_list = os.listdir()
+                new_list = []
+                d = 1
+                for i in dir_list:
+                    if os.path.isdir(i):
+                        new_list.append(i)
+                        print(str(d) + " - " + i)
+                        d += 1
+                sel_folder = int(input("Please select the folder id: "))
+                ftr = os.listdir(new_list[sel_folder - 1])
+                for i in ftr:
+                    # print(i)
+                    # print(os.path.isfile(i))
+                    if os.path.isfile(i):
                         print(i)
-                        print(new_list[sel_folder-1])
-                        f_torem = "./"+ new_list[sel_folder -1]+"/"+i
-                        os.remove(f_torem)
-            # print(os.listdir(new_list[sel_folder-1]))
+                        print(i.find("dupl"))
+                        if i.find("dupl") != -1:
+                            print(i)
+                            print(new_list[sel_folder - 1])
+                            f_torem = "./" + new_list[sel_folder - 1] + "/" + i
+                            os.remove(f_torem)
 
-        #return list of directories
-        #https://www.tutorialspoint.com/python/string_find.htm search in string
+            elif do == 6:
+                dir_list = os.listdir()
+                new_list = []
+                for i in dir_list:
+                    if os.path.isfile(i):
+                        new_list.append(i)
+                random_file = random.choice(new_list)
+                print("Here is your random file: ", random_file)
+                os.remove(random_file)
+
+
+            else:
+                pass
+
+        elif answer == 'N':
+            print("Good bye!")
         else:
-            pass
+            print("Unknown input")
 
-    elif answer == 'N':
-        print("Good bye!")
-    else:
-        print("Unknown input")
+if __name__ == "__main__":
+    main()

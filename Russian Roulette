@@ -47,7 +47,6 @@ def rotate_pistol(base_x, base_y, start):
 draw_pistol(100,100)
 
 answer = ""
-start=0
 while answer !="N":
     answer = turtle.textinput("Play?","Y/N").upper()
     if answer == "Y":
